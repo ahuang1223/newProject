@@ -2,20 +2,19 @@
 #include <cmath>
 #include <ctime>
 #include <cstdlib>
+#include <random>
 
 int main() {
     std::cout << "Guess the Number!" << std::endl;
     int guessedNumber;
-    int randomNumber = 0;
-    int minValue = 1;
-    int maxValue = 100;
-    srand(time(0));
-    randomNumber = rand() % (maxValue - minValue - 1) + minValue;
+    long randomNumber = 0;
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dist(1, 100);
+    randomNumber = dist(gen);
     do {
         std::cout << "Enter Number!" << std::endl;
         std::cin >> guessedNumber;
-
-
         if (randomNumber > guessedNumber)
         {
             std::cout << "Higher!" << std::endl;
